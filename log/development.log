@@ -1,0 +1,1009 @@
+  [1m[36m (76.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (53.1ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20160420194342)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (93.5ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "name" character varying, "socket_id" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160420194342"]]
+  [1m[36m (24.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateRooms (20160420194357)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (109.9ms)[0m  [1mCREATE TABLE "rooms" ("id" serial primary key, "name" character varying, "socket_id" character varying, "owner_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160420194357"]]
+  [1m[36m (7.7ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (1.9ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'rooms'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.7ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36mRoom Load (0.5ms)[0m  [1mSELECT "rooms".* FROM "rooms"[0m
+
+
+Started GET "/" for 127.0.0.1 at 2016-04-21 09:02:49 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/railties-4.2.6/lib/rails/templates/rails/welcome/index.html.erb (1.9ms)
+Completed 200 OK in 43ms (Views: 25.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2016-04-21 09:02:55 -0500
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users"
+  Rendered users/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 1684ms (Views: 1681.5ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/rooms.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-04-21 09:02:57 -0500
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2016-04-21 09:02:57 -0500
+
+
+Started GET "/assets/scaffolds.self-ac31bef1c188a431cb1ccf1a8584585b97083a4c2f301f339a90d6cee60ee652.css?body=1" for 127.0.0.1 at 2016-04-21 09:02:57 -0500
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-04-21 09:02:57 -0500
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-04-21 09:02:57 -0500
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-04-21 09:02:57 -0500
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-04-21 09:02:57 -0500
+
+
+Started GET "/assets/rooms.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-04-21 09:02:57 -0500
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-04-21 09:02:57 -0500
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2016-04-21 09:02:57 -0500
+
+
+Started GET "/users/new" for 127.0.0.1 at 2016-04-21 09:03:02 -0500
+Processing by UsersController#new as HTML
+  Rendered users/_form.html.erb (99.4ms)
+  Rendered users/new.html.erb within layouts/application (129.6ms)
+Completed 200 OK in 171ms (Views: 159.7ms | ActiveRecord: 3.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-04-21 09:03:12 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"g8+tmOpDEnXR8HU2ExlSH6a9mZLHJQZ+d6lb77/L7cA6JHB/MPGPq8Qxk5Rk1ObDm/hxSC7GHVgoKq05iwX4nA==", "user"=>{"name"=>"Test", "socket_id"=>"123456789"}, "commit"=>"Create User"}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "users" ("name", "socket_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Test"], ["socket_id", "123456789"], ["created_at", "2016-04-21 14:03:12.089768"], ["updated_at", "2016-04-21 14:03:12.089768"]]
+  [1m[36m (60.3ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/users/1
+Completed 302 Found in 68ms (ActiveRecord: 61.1ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2016-04-21 09:03:12 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered users/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 54ms (Views: 20.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2016-04-21 09:03:21 -0500
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (1.6ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 20ms (Views: 17.8ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/users/1/edit" for 127.0.0.1 at 2016-04-21 09:03:26 -0500
+Processing by UsersController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered users/_form.html.erb (3.4ms)
+  Rendered users/edit.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 35ms (Views: 32.6ms | ActiveRecord: 0.5ms)
+
+
+Started PATCH "/users/1" for 127.0.0.1 at 2016-04-21 09:03:33 -0500
+Processing by UsersController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/hbQBFCz2YNgN7qxv12tVSMwhEPIsGyaTBWBy/O+IA5H/Q3jigFEXXX2XBPIkBmJHnVsmSFTd7wTlncdx3A1Ug==", "user"=>{"name"=>"Test", "socket_id"=>"123456111"}, "commit"=>"Update User", "id"=>"1"}
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "users" SET "socket_id" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["socket_id", "123456111"], ["updated_at", "2016-04-21 14:03:33.092442"], ["id", 1]]
+  [1m[35m (36.4ms)[0m  COMMIT
+Redirected to http://localhost:3000/users/1
+Completed 302 Found in 45ms (ActiveRecord: 37.7ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2016-04-21 09:03:33 -0500
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  Rendered users/show.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 32ms (Views: 29.8ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2016-04-21 09:03:36 -0500
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users"
+  Rendered users/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 32ms (Views: 30.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/rooms.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-04-21 09:03:36 -0500
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-04-21 09:03:36 -0500
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-04-21 09:03:36 -0500
+
+
+Started GET "/assets/scaffolds.self-ac31bef1c188a431cb1ccf1a8584585b97083a4c2f301f339a90d6cee60ee652.css?body=1" for 127.0.0.1 at 2016-04-21 09:03:36 -0500
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2016-04-21 09:03:36 -0500
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-04-21 09:03:36 -0500
+
+
+Started GET "/assets/rooms.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-04-21 09:03:36 -0500
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-04-21 09:03:36 -0500
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2016-04-21 09:03:37 -0500
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-04-21 09:03:37 -0500
+
+
+Started GET "/users.json" for 127.0.0.1 at 2016-04-21 09:03:45 -0500
+Processing by UsersController#index as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered users/index.json.jbuilder (83.8ms)
+Completed 200 OK in 87ms (Views: 85.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-04-21 09:35:56 -0500
+DEPRECATION WARNING: Defining a route where `to` is a controller without an action is deprecated. Please change `to: 'create'` to `controller: 'create'`. (called from block (3 levels) in <top (required)> at /home/ruby/Proyectos/Server-Chat/config/routes.rb:22)
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/railties-4.2.6/lib/rails/templates/rails/welcome/index.html.erb (1.2ms)
+Completed 200 OK in 16ms (Views: 8.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2016-04-21 09:36:03 -0500
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users"
+  Rendered users/index.html.erb within layouts/application (9.7ms)
+Completed 200 OK in 169ms (Views: 164.1ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2016-04-21 09:36:06 -0500
+Processing by UsersController#new as HTML
+  Rendered users/_form.html.erb (11.7ms)
+  Rendered users/new.html.erb within layouts/application (18.4ms)
+Completed 200 OK in 32ms (Views: 31.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-04-21 09:36:20 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gBgMLSj2+qKSbcn3lPl3uTeU2SJZ5cdWtrIVgG8ITNo589HK8kRnfIesL1XjNMNlCtEx+LAG3HDpMeNWW8ZZhg==", "user"=>{"name"=>"Test2", "socket_id"=>"123456789"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1[0m  [["name", "Test2"]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("name", "socket_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test2"], ["socket_id", "123456789"], ["created_at", "2016-04-21 14:36:20.583537"], ["updated_at", "2016-04-21 14:36:20.583537"]]
+  [1m[35m (39.8ms)[0m  COMMIT
+Completed 500 Internal Server Error in 51ms (ActiveRecord: 40.8ms)
+
+ArgumentError (too few arguments):
+  app/controllers/users_controller.rb:54:in `format'
+  app/controllers/users_controller.rb:54:in `create'
+
+
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.8ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (24.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (17.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (34.4ms)
+DEPRECATION WARNING: Defining a route where `to` is a controller without an action is deprecated. Please change `to: 'create'` to `controller: 'create'`. (called from block (3 levels) in <top (required)> at /home/ruby/Proyectos/Server-Chat/config/routes.rb:22)
+
+
+Started GET "/users" for 127.0.0.1 at 2016-04-21 09:38:18 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users"
+  Rendered users/index.html.erb within layouts/application (12.1ms)
+Completed 200 OK in 215ms (Views: 200.7ms | ActiveRecord: 3.7ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2016-04-21 09:38:19 -0500
+Processing by UsersController#new as HTML
+  Rendered users/_form.html.erb (18.8ms)
+  Rendered users/new.html.erb within layouts/application (24.0ms)
+Completed 200 OK in 41ms (Views: 40.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-04-21 09:38:26 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dU07F6MAJwByCjLnKYxjRp2JjUw4ubJTCuqNMJkjn7vMpubwebK63mfL1EVeQdeaoMxlltFaqXVVaXvmre2K5w==", "user"=>{"name"=>"Test3", "socket_id"=>"1223456789"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1[0m  [["name", "Test3"]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "users" ("name", "socket_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test3"], ["socket_id", "1223456789"], ["created_at", "2016-04-21 14:38:26.570987"], ["updated_at", "2016-04-21 14:38:26.570987"]]
+  [1m[35m (45.0ms)[0m  COMMIT
+  Rendered users/show.html.erb within layouts/application (0.6ms)
+Completed 201 Created in 72ms (Views: 12.5ms | ActiveRecord: 46.3ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-04-21 09:39:13 -0500
+DEPRECATION WARNING: Defining a route where `to` is a controller without an action is deprecated. Please change `to: 'create'` to `controller: 'create'`. (called from block (3 levels) in <top (required)> at /home/ruby/Proyectos/Server-Chat/config/routes.rb:22)
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xVLEb5x3zgseZ/LsJn55wOahEc2+P9UwewL2YuwFQz58uRmIRsVT1QumFE5Rs80c2+T5F1fczhYkgQC02MtWYg==", "user"=>{"name"=>"Test4", "socket_id"=>"1223456789"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1[0m  [["name", "Test4"]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("name", "socket_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test4"], ["socket_id", "1223456789"], ["created_at", "2016-04-21 14:39:13.812128"], ["updated_at", "2016-04-21 14:39:13.812128"]]
+  [1m[35m (51.8ms)[0m  COMMIT
+Completed 201 Created in 63ms (Views: 0.9ms | ActiveRecord: 54.5ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2016-04-21 09:43:51 -0500
+DEPRECATION WARNING: Defining a route where `to` is a controller without an action is deprecated. Please change `to: 'create'` to `controller: 'create'`. (called from block (3 levels) in <top (required)> at /home/ruby/Proyectos/Server-Chat/config/routes.rb:22)
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 46ms (Views: 43.1ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2016-04-21 09:43:52 -0500
+Processing by UsersController#new as HTML
+  Rendered users/_form.html.erb (1.3ms)
+  Rendered users/new.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 16ms (Views: 15.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-04-21 09:43:59 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"NNe8zjGHIHYPtJlrltt0RaX0JOLqUn8CTa05JB3iFwWNPGEp6zW9qBp1f8nhFsCZmLHMOAOxZCQSLs/yKSwCWQ==", "user"=>{"name"=>"Test5", "socket_id"=>"123456789"}, "commit"=>"Create User"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1  [["name", "Test5"]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "socket_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Test5"], ["socket_id", "123456789"], ["created_at", "2016-04-21 14:43:59.831328"], ["updated_at", "2016-04-21 14:43:59.831328"]]
+  [1m[36m (33.2ms)[0m  [1mCOMMIT[0m
+Completed 200 OK in 38ms (Views: 0.5ms | ActiveRecord: 33.9ms)
+DEPRECATION WARNING: Defining a route where `to` is a controller without an action is deprecated. Please change `to: 'create'` to `controller: 'create'`. (called from block (3 levels) in <top (required)> at /home/ruby/Proyectos/Server-Chat/config/routes.rb:22)
+DEPRECATION WARNING: Defining a route where `to` is a controller without an action is deprecated. Please change `to: 'create'` to `controller: 'create'`. (called from block (3 levels) in <top (required)> at /home/ruby/Proyectos/Server-Chat/config/routes.rb:22)
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUserRooms (20160421145311)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (35.1ms)[0m  [1mCREATE TABLE "user_rooms" ("id" serial primary key, "user_id" integer, "room_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20160421145311"]]
+  [1m[36m (12.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (2.0ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'rooms'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.7ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'user_rooms'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.8ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+
+
+Started GET "/rooms" for 127.0.0.1 at 2016-04-21 10:03:29 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by RoomsController#index as HTML
+  [1m[35mRoom Load (0.5ms)[0m  SELECT "rooms".* FROM "rooms"
+  Rendered rooms/index.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 215ms (Views: 174.6ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/assets/rooms.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-04-21 10:03:29 -0500
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-04-21 10:03:29 -0500
+
+
+Started GET "/assets/scaffolds.self-ac31bef1c188a431cb1ccf1a8584585b97083a4c2f301f339a90d6cee60ee652.css?body=1" for 127.0.0.1 at 2016-04-21 10:03:29 -0500
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2016-04-21 10:03:29 -0500
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2016-04-21 10:03:29 -0500
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-04-21 10:03:29 -0500
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-04-21 10:03:29 -0500
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2016-04-21 10:03:29 -0500
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-04-21 10:03:29 -0500
+
+
+Started GET "/assets/rooms.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2016-04-21 10:03:29 -0500
+
+
+Started GET "/users" for 127.0.0.1 at 2016-04-21 10:03:56 -0500
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 28ms (Views: 21.8ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/users.json" for 127.0.0.1 at 2016-04-21 10:04:00 -0500
+Processing by UsersController#index as JSON
+  [1m[35mUser Load (0.6ms)[0m  SELECT "users".* FROM "users"
+  Rendered users/index.json.jbuilder (6.0ms)
+Completed 200 OK in 10ms (Views: 8.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/rooms/new" for 127.0.0.1 at 2016-04-21 10:09:42 -0500
+Processing by RoomsController#new as HTML
+  Rendered rooms/_form.html.erb (36.7ms)
+  Rendered rooms/new.html.erb within layouts/application (40.2ms)
+Completed 200 OK in 128ms (Views: 56.3ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/rooms" for 127.0.0.1 at 2016-04-21 10:09:57 -0500
+Processing by RoomsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"mfjI1uYkpAbymB9QM6TzNcZXGMd9bK7w4UdAS08SwkcgExUxPJY52OdZ+fJEaUfp+xLwHZSPtda+xLade9zXGw==", "room"=>{"name"=>"Room", "socket_id"=>"123456789", "owner_id"=>"1"}, "commit"=>"Create Room"}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "rooms" ("name", "socket_id", "owner_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["name", "Room"], ["socket_id", "123456789"], ["owner_id", 1], ["created_at", "2016-04-21 15:09:57.492412"], ["updated_at", "2016-04-21 15:09:57.492412"]]
+  [1m[36m (37.6ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/rooms/1
+Completed 302 Found in 45ms (ActiveRecord: 38.6ms)
+
+
+Started GET "/rooms/1" for 127.0.0.1 at 2016-04-21 10:09:57 -0500
+Processing by RoomsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mRoom Load (0.4ms)[0m  SELECT  "rooms".* FROM "rooms" WHERE "rooms"."id" = $1 LIMIT 1  [["id", 1]]
+  Rendered rooms/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 43ms (Views: 31.9ms | ActiveRecord: 0.4ms)
+  [1m[36mRoom Load (0.7ms)[0m  [1mSELECT  "rooms".* FROM "rooms"  ORDER BY "rooms"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.8ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" DESC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "user_rooms" ("user_id", "room_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["user_id", 5], ["room_id", 1], ["created_at", "2016-04-21 15:11:40.963717"], ["updated_at", "2016-04-21 15:11:40.963717"]]
+  [1m[36m (17.5ms)[0m  [1mCOMMIT[0m
+
+
+Started GET "/users" for 127.0.0.1 at 2016-04-21 10:18:46 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users"
+  Rendered users/index.html.erb within layouts/application (9.5ms)
+Completed 200 OK in 183ms (Views: 168.0ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2016-04-21 10:18:48 -0500
+Processing by UsersController#new as HTML
+  Rendered users/_form.html.erb (9.8ms)
+  Rendered users/new.html.erb within layouts/application (12.7ms)
+Completed 200 OK in 26ms (Views: 25.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-04-21 10:18:56 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zBh2nloEZG/LRPrWxwaBrZmIVuarg9JBUghkZlJHcX1186t5gLb5sd6FHHSwyzVxpM2+PEJgyWcNi5KwZolkIQ==", "user"=>{"name"=>"Test5", "socket_id"=>"123456789"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1[0m  [["name", "Test5"]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE ("users"."name" != $1)  [["name", "Test5"]]
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 1.4ms)
+
+NameError (undefined local variable or method `user' for #<UsersController:0x007f674e6c7f20>):
+  app/controllers/users_controller.rb:40:in `create'
+
+
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (9.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.7ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (32.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.8ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.8ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.9ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (19.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.7ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (37.3ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2016-04-21 10:19:34 -0500
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (9.3ms)
+Completed 200 OK in 38ms (Views: 32.5ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2016-04-21 10:19:35 -0500
+Processing by UsersController#new as HTML
+  Rendered users/_form.html.erb (1.9ms)
+  Rendered users/new.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 36ms (Views: 35.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-04-21 10:19:42 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"A+ty1Xt4pYXucRND0isXeoxyuiTq3rlVlGCyXotZH366AK8yoco4W/uw9eGl5qOmsTdS/gM9onPL40SIv5cKIg==", "user"=>{"name"=>"Test5", "socket_id"=>"123456789"}, "commit"=>"Create User"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1  [["name", "Test5"]]
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."name" != $1)[0m  [["name", "Test5"]]
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 1.5ms)
+
+ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  no existe la columna «owner_id»
+LINE 1: ...E "user_rooms"."user_id" = $1 AND (user_id = 5 OR owner_id =...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "user_rooms.user_id".
+: SELECT "user_rooms".* FROM "user_rooms" WHERE "user_rooms"."user_id" = $1 AND (user_id = 5 OR owner_id = 5)):
+  app/controllers/users_controller.rb:41:in `create'
+
+
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (26.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (16.5ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (33.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-04-21 10:22:51 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"A+ty1Xt4pYXucRND0isXeoxyuiTq3rlVlGCyXotZH366AK8yoco4W/uw9eGl5qOmsTdS/gM9onPL40SIv5cKIg==", "user"=>{"name"=>"Test5", "socket_id"=>"123456789"}, "commit"=>"Create User"}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1  [["name", "Test5"]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."name" != $1)[0m  [["name", "Test5"]]
+Completed 500 Internal Server Error in 48ms (ActiveRecord: 4.7ms)
+
+ActiveRecord::StatementInvalid (PG::UndefinedTable: ERROR:  falta una entrada para la tabla «room» en la cláusula FROM
+LINE 1: ...E "user_rooms"."user_id" = $1 AND (user_id = 5 OR room.owner...
+                                                             ^
+: SELECT "user_rooms".* FROM "user_rooms" WHERE "user_rooms"."user_id" = $1 AND (user_id = 5 OR room.owner_id = 5)):
+  app/controllers/users_controller.rb:41:in `create'
+
+
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (23.0ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (17.6ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (34.9ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-04-21 10:25:49 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"A+ty1Xt4pYXucRND0isXeoxyuiTq3rlVlGCyXotZH366AK8yoco4W/uw9eGl5qOmsTdS/gM9onPL40SIv5cKIg==", "user"=>{"name"=>"Test5", "socket_id"=>"123456789"}, "commit"=>"Create User"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1  [["name", "Test5"]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."name" != $1)[0m  [["name", "Test5"]]
+  [1m[35mRoom Load (1.1ms)[0m  SELECT "rooms".* FROM "rooms" INNER JOIN "user_rooms" ON "user_rooms"."room_id" = "rooms"."id" WHERE (user_rooms.user_id = 5 OR room.owner_id = 5)
+Completed 500 Internal Server Error in 58ms (ActiveRecord: 4.7ms)
+
+ActiveRecord::StatementInvalid (PG::UndefinedTable: ERROR:  falta una entrada para la tabla «room» en la cláusula FROM
+LINE 1: ..." = "rooms"."id" WHERE (user_rooms.user_id = 5 OR room.owner...
+                                                             ^
+: SELECT "rooms".* FROM "rooms" INNER JOIN "user_rooms" ON "user_rooms"."room_id" = "rooms"."id" WHERE (user_rooms.user_id = 5 OR room.owner_id = 5)):
+  app/controllers/users_controller.rb:41:in `create'
+
+
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (9.8ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (25.6ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (15.9ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (30.2ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-04-21 10:27:06 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"A+ty1Xt4pYXucRND0isXeoxyuiTq3rlVlGCyXotZH366AK8yoco4W/uw9eGl5qOmsTdS/gM9onPL40SIv5cKIg==", "user"=>{"name"=>"Test5", "socket_id"=>"123456789"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1[0m  [["name", "Test5"]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE ("users"."name" != $1)  [["name", "Test5"]]
+  [1m[36mRoom Load (0.6ms)[0m  [1mSELECT "rooms".* FROM "rooms" INNER JOIN "user_rooms" ON "user_rooms"."room_id" = "rooms"."id" WHERE (user_rooms.user_id = 5 OR rooms.owner_id = 5)[0m
+Completed 200 OK in 23ms (Views: 8.1ms | ActiveRecord: 4.7ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-04-21 10:27:21 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"knqcdrf5micVB890sdDgde6vL3MyPD/ok62pZ4JHUFErkUGRbUsH+QDGKdbGHVSp0+rHqdvfJM7MLl+xtolFDQ==", "user"=>{"name"=>"Test1", "socket_id"=>"123456789"}, "commit"=>"Create User"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1  [["name", "Test1"]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("name", "socket_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Test1"], ["socket_id", "123456789"], ["created_at", "2016-04-21 15:27:21.609040"], ["updated_at", "2016-04-21 15:27:21.609040"]]
+  [1m[36m (75.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE ("users"."name" != $1)  [["name", "Test1"]]
+Completed 200 OK in 86ms (Views: 2.2ms | ActiveRecord: 77.2ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-04-21 10:27:31 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"knqcdrf5micVB890sdDgde6vL3MyPD/ok62pZ4JHUFErkUGRbUsH+QDGKdbGHVSp0+rHqdvfJM7MLl+xtolFDQ==", "user"=>{"name"=>"Test", "socket_id"=>"123456789"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1[0m  [["name", "Test"]]
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE ("users"."name" != $1)  [["name", "Test"]]
+  [1m[36mRoom Load (0.9ms)[0m  [1mSELECT "rooms".* FROM "rooms" INNER JOIN "user_rooms" ON "user_rooms"."room_id" = "rooms"."id" WHERE (user_rooms.user_id = 1 OR rooms.owner_id = 1)[0m
+Completed 200 OK in 11ms (Views: 6.0ms | ActiveRecord: 1.9ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-04-21 10:27:45 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"knqcdrf5micVB890sdDgde6vL3MyPD/ok62pZ4JHUFErkUGRbUsH+QDGKdbGHVSp0+rHqdvfJM7MLl+xtolFDQ==", "user"=>{"name"=>"Test", "socket_id"=>"123456789"}, "commit"=>"Create User"}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1  [["name", "Test"]]
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."name" != $1)[0m  [["name", "Test"]]
+  [1m[35mRoom Load (0.6ms)[0m  SELECT "rooms".* FROM "rooms" INNER JOIN "user_rooms" ON "user_rooms"."room_id" = "rooms"."id" WHERE (user_rooms.user_id = 1 OR rooms.owner_id = 1)
+Completed 200 OK in 10ms (Views: 5.3ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-04-21 10:27:51 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"knqcdrf5micVB890sdDgde6vL3MyPD/ok62pZ4JHUFErkUGRbUsH+QDGKdbGHVSp0+rHqdvfJM7MLl+xtolFDQ==", "user"=>{"name"=>"Test2", "socket_id"=>"123456789"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1[0m  [["name", "Test2"]]
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE ("users"."name" != $1)  [["name", "Test2"]]
+  [1m[36mRoom Load (0.5ms)[0m  [1mSELECT "rooms".* FROM "rooms" INNER JOIN "user_rooms" ON "user_rooms"."room_id" = "rooms"."id" WHERE (user_rooms.user_id = 2 OR rooms.owner_id = 2)[0m
+Completed 200 OK in 7ms (Views: 4.5ms | ActiveRecord: 1.2ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-04-21 10:28:42 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"knqcdrf5micVB890sdDgde6vL3MyPD/ok62pZ4JHUFErkUGRbUsH+QDGKdbGHVSp0+rHqdvfJM7MLl+xtolFDQ==", "user"=>{"name"=>"Test6", "socket_id"=>"123456789"}, "commit"=>"Create User"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1  [["name", "Test6"]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "socket_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Test6"], ["socket_id", "123456789"], ["created_at", "2016-04-21 15:28:42.791300"], ["updated_at", "2016-04-21 15:28:42.791300"]]
+  [1m[36m (44.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE ("users"."name" != $1)  [["name", "Test6"]]
+Completed 200 OK in 60ms (Views: 2.6ms | ActiveRecord: 47.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-04-21 14:29:06 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/railties-4.2.6/lib/rails/templates/rails/welcome/index.html.erb (1.7ms)
+Completed 200 OK in 19ms (Views: 11.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/rooms" for 127.0.0.1 at 2016-04-21 14:29:10 -0500
+Processing by RoomsController#index as HTML
+  [1m[35mRoom Load (0.4ms)[0m  SELECT "rooms".* FROM "rooms"
+  Rendered rooms/index.html.erb within layouts/application (9.5ms)
+Completed 200 OK in 178ms (Views: 169.8ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/rooms/new" for 127.0.0.1 at 2016-04-21 14:29:15 -0500
+Processing by RoomsController#new as HTML
+  Rendered rooms/_form.html.erb (12.7ms)
+  Rendered rooms/new.html.erb within layouts/application (16.8ms)
+Completed 200 OK in 30ms (Views: 29.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/room" for 127.0.0.1 at 2016-04-21 14:41:46 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+ActionController::RoutingError (No route matches [GET] "/room"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/ruby/.rbenv/versions/2.2.3/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /home/ruby/.rbenv/versions/2.2.3/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /home/ruby/.rbenv/versions/2.2.3/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.0ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (19.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (9.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (53.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (18.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (34.6ms)
+
+
+Started GET "/rooms" for 127.0.0.1 at 2016-04-21 14:41:50 -0500
+Processing by RoomsController#index as HTML
+  [1m[35mRoom Load (0.5ms)[0m  SELECT "rooms".* FROM "rooms"
+  Rendered rooms/index.html.erb within layouts/application (8.2ms)
+Completed 200 OK in 169ms (Views: 157.6ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/rooms/new" for 127.0.0.1 at 2016-04-21 14:41:52 -0500
+Processing by RoomsController#new as HTML
+  Rendered rooms/_form.html.erb (12.8ms)
+  Rendered rooms/new.html.erb within layouts/application (15.4ms)
+Completed 200 OK in 36ms (Views: 34.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/rooms" for 127.0.0.1 at 2016-04-21 14:42:40 -0500
+Processing by RoomsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gwFmyeUA9aPeSTIMVP0auMKmmiM1cc4jUqKOHnV08VE66rsuP7JofcuI1K4jMK5k/+Ny+dyS1QUNIXjIQbrkDQ==", "room"=>{"name"=>"Room", "socket_id"=>"123456789", "owner_id"=>"1"}, "commit"=>"Create Room"}
+  [1m[36mRoom Load (0.2ms)[0m  [1mSELECT  "rooms".* FROM "rooms" WHERE "rooms"."name" = $1 LIMIT 1[0m  [["name", "Room"]]
+  [1m[35mUser Load (0.8ms)[0m  SELECT  "users".* FROM "users" WHERE (1) LIMIT 1
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 2.7ms)
+
+ActiveRecord::StatementInvalid (PG::DatatypeMismatch: ERROR:  el argumento de WHERE debe ser de tipo boolean, no tipo integer
+LINE 1: SELECT  "users".* FROM "users" WHERE (1) LIMIT 1
+                                              ^
+: SELECT  "users".* FROM "users" WHERE (1) LIMIT 1):
+  app/controllers/rooms_controller.rb:33:in `create'
+
+
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.7ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (5.5ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (28.9ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.6ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.7ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (17.8ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (35.5ms)
+
+
+Started POST "/rooms" for 127.0.0.1 at 2016-04-21 14:43:01 -0500
+Processing by RoomsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gwFmyeUA9aPeSTIMVP0auMKmmiM1cc4jUqKOHnV08VE66rsuP7JofcuI1K4jMK5k/+Ny+dyS1QUNIXjIQbrkDQ==", "room"=>{"name"=>"Room", "socket_id"=>"123456789", "owner_id"=>"1"}, "commit"=>"Create Room"}
+  [1m[36mRoom Load (0.4ms)[0m  [1mSELECT  "rooms".* FROM "rooms" WHERE "rooms"."name" = $1 LIMIT 1[0m  [["name", "Room"]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "user_rooms" ("user_id", "room_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["user_id", 1], ["room_id", 1], ["created_at", "2016-04-21 19:43:01.387190"], ["updated_at", "2016-04-21 19:43:01.387190"]]
+  [1m[36m (16.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mUserRoom Load (0.5ms)[0m  SELECT "user_rooms".* FROM "user_rooms" WHERE "user_rooms"."room_id" = $1  [["room_id", 1]]
+Completed 200 OK in 89ms (Views: 2.0ms | ActiveRecord: 23.8ms)
+
+
+Started POST "/rooms" for 127.0.0.1 at 2016-04-21 14:44:41 -0500
+Processing by RoomsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gwFmyeUA9aPeSTIMVP0auMKmmiM1cc4jUqKOHnV08VE66rsuP7JofcuI1K4jMK5k/+Ny+dyS1QUNIXjIQbrkDQ==", "room"=>{"name"=>"Room", "socket_id"=>"123456789", "owner_id"=>"1"}, "commit"=>"Create Room"}
+  [1m[36mRoom Load (0.3ms)[0m  [1mSELECT  "rooms".* FROM "rooms" WHERE "rooms"."name" = $1 LIMIT 1[0m  [["name", "Room"]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "user_rooms" ("user_id", "room_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["user_id", 1], ["room_id", 1], ["created_at", "2016-04-21 19:44:41.353017"], ["updated_at", "2016-04-21 19:44:41.353017"]]
+  [1m[36m (22.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mUserRoom Load (0.5ms)[0m  SELECT "user_rooms".* FROM "user_rooms" WHERE "user_rooms"."room_id" = $1  [["room_id", 1]]
+  [1m[36mRoom Load (0.4ms)[0m  [1mSELECT  "rooms".* FROM "rooms" WHERE "rooms"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 5]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "rooms".* FROM "rooms" WHERE "rooms"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "rooms".* FROM "rooms" WHERE "rooms"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+Completed 200 OK in 71ms (Views: 0.1ms | ActiveRecord: 31.2ms)
+
+
+Started POST "/rooms" for 127.0.0.1 at 2016-04-21 14:45:52 -0500
+Processing by RoomsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gwFmyeUA9aPeSTIMVP0auMKmmiM1cc4jUqKOHnV08VE66rsuP7JofcuI1K4jMK5k/+Ny+dyS1QUNIXjIQbrkDQ==", "room"=>{"name"=>"Room", "socket_id"=>"123456789", "owner_id"=>"1"}, "commit"=>"Create Room"}
+  [1m[36mRoom Load (0.2ms)[0m  [1mSELECT  "rooms".* FROM "rooms" WHERE "rooms"."name" = $1 LIMIT 1[0m  [["name", "Room"]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "user_rooms" ("user_id", "room_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["user_id", 1], ["room_id", 1], ["created_at", "2016-04-21 19:45:52.402768"], ["updated_at", "2016-04-21 19:45:52.402768"]]
+  [1m[36m (9.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+Completed 500 Internal Server Error in 93ms (ActiveRecord: 15.0ms)
+
+ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  no existe la columna users.owner_id
+LINE 1: SELECT  "users".* FROM "users" WHERE "users"."owner_id" = $1...
+                                             ^
+: SELECT  "users".* FROM "users" WHERE "users"."owner_id" = $1 LIMIT 1):
+  app/controllers/rooms_controller.rb:37:in `create'
+
+
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.8ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (21.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (17.0ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (32.1ms)
+
+
+Started POST "/rooms" for 127.0.0.1 at 2016-04-21 14:46:18 -0500
+Processing by RoomsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gwFmyeUA9aPeSTIMVP0auMKmmiM1cc4jUqKOHnV08VE66rsuP7JofcuI1K4jMK5k/+Ny+dyS1QUNIXjIQbrkDQ==", "room"=>{"name"=>"Room", "socket_id"=>"123456789", "owner_id"=>"1"}, "commit"=>"Create Room"}
+  [1m[35mRoom Load (0.3ms)[0m  SELECT  "rooms".* FROM "rooms" WHERE "rooms"."name" = $1 LIMIT 1  [["name", "Room"]]
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "user_rooms" ("user_id", "room_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 1], ["room_id", 1], ["created_at", "2016-04-21 19:46:18.212236"], ["updated_at", "2016-04-21 19:46:18.212236"]]
+  [1m[35m (13.2ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36mUserRoom Load (0.3ms)[0m  [1mSELECT "user_rooms".* FROM "user_rooms" WHERE "user_rooms"."room_id" = $1[0m  [["room_id", 1]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 5]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 53ms (Views: 0.1ms | ActiveRecord: 20.6ms)
+
+
+Started POST "/rooms" for 127.0.0.1 at 2016-04-21 14:48:39 -0500
+Processing by RoomsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gwFmyeUA9aPeSTIMVP0auMKmmiM1cc4jUqKOHnV08VE66rsuP7JofcuI1K4jMK5k/+Ny+dyS1QUNIXjIQbrkDQ==", "room"=>{"name"=>"Room", "socket_id"=>"123456789", "owner_id"=>"1"}, "commit"=>"Create Room"}
+  [1m[35mRoom Load (0.3ms)[0m  SELECT  "rooms".* FROM "rooms" WHERE "rooms"."name" = $1 LIMIT 1  [["name", "Room"]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "user_rooms" ("user_id", "room_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 1], ["room_id", 1], ["created_at", "2016-04-21 19:48:39.693887"], ["updated_at", "2016-04-21 19:48:39.693887"]]
+  [1m[35m (16.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+Completed 500 Internal Server Error in 50ms (ActiveRecord: 21.5ms)
+
+ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  no existe la columna users.owner_id
+LINE 1: SELECT  "users".* FROM "users" WHERE "users"."owner_id" = $1...
+                                             ^
+: SELECT  "users".* FROM "users" WHERE "users"."owner_id" = $1 LIMIT 1):
+  app/controllers/rooms_controller.rb:37:in `create'
+
+
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.9ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (22.6ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (15.0ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (30.2ms)
+
+
+Started POST "/rooms" for 127.0.0.1 at 2016-04-21 14:49:46 -0500
+Processing by RoomsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gwFmyeUA9aPeSTIMVP0auMKmmiM1cc4jUqKOHnV08VE66rsuP7JofcuI1K4jMK5k/+Ny+dyS1QUNIXjIQbrkDQ==", "room"=>{"name"=>"Room", "socket_id"=>"123456789", "owner_id"=>"1"}, "commit"=>"Create Room"}
+  [1m[36mRoom Load (0.2ms)[0m  [1mSELECT  "rooms".* FROM "rooms" WHERE "rooms"."name" = $1 LIMIT 1[0m  [["name", "Room"]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "user_rooms" ("user_id", "room_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["user_id", 1], ["room_id", 1], ["created_at", "2016-04-21 19:49:46.141746"], ["updated_at", "2016-04-21 19:49:46.141746"]]
+  [1m[36m (15.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+Completed 500 Internal Server Error in 46ms (ActiveRecord: 21.2ms)
+
+NoMethodError (undefined method `include' for #<Room:0x007fa721e3ac68>):
+  app/controllers/rooms_controller.rb:37:in `create'
+
+
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.7ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (19.0ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (15.9ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (31.2ms)
+
+
+Started POST "/rooms" for 127.0.0.1 at 2016-04-21 15:03:50 -0500
+Processing by RoomsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gwFmyeUA9aPeSTIMVP0auMKmmiM1cc4jUqKOHnV08VE66rsuP7JofcuI1K4jMK5k/+Ny+dyS1QUNIXjIQbrkDQ==", "room"=>{"name"=>"Room", "socket_id"=>"123456789", "owner_id"=>"1"}, "commit"=>"Create Room"}
+  [1m[35mRoom Load (0.3ms)[0m  SELECT  "rooms".* FROM "rooms" WHERE "rooms"."name" = $1 LIMIT 1  [["name", "Room"]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "user_rooms" ("user_id", "room_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 1], ["room_id", 1], ["created_at", "2016-04-21 20:03:50.912213"], ["updated_at", "2016-04-21 20:03:50.912213"]]
+  [1m[35m (10.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36mRoom Load (0.4ms)[0m  [1mSELECT "rooms".* FROM "rooms"[0m
+  [1m[35mUserRoom Load (0.5ms)[0m  SELECT "user_rooms".* FROM "user_rooms" WHERE "user_rooms"."room_id" IN (1)
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" IN (5, 1)[0m
+Completed 200 OK in 86ms (Views: 40.2ms | ActiveRecord: 17.1ms)
+
+
+Started POST "/rooms" for 127.0.0.1 at 2016-04-21 15:04:17 -0500
+Processing by RoomsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gwFmyeUA9aPeSTIMVP0auMKmmiM1cc4jUqKOHnV08VE66rsuP7JofcuI1K4jMK5k/+Ny+dyS1QUNIXjIQbrkDQ==", "room"=>{"name"=>"Room", "socket_id"=>"123456789", "owner_id"=>"1"}, "commit"=>"Create Room"}
+  [1m[35mRoom Load (0.5ms)[0m  SELECT  "rooms".* FROM "rooms" WHERE "rooms"."name" = $1 LIMIT 1  [["name", "Room"]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "user_rooms" ("user_id", "room_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 1], ["room_id", 1], ["created_at", "2016-04-21 20:04:17.833043"], ["updated_at", "2016-04-21 20:04:17.833043"]]
+  [1m[35m (24.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36mRoom Load (0.3ms)[0m  [1mSELECT "rooms".* FROM "rooms"[0m
+  [1m[35mUser Load (0.9ms)[0m  SELECT "users".* FROM "users" WHERE "users"."owner_id" IN ('1')
+Completed 500 Internal Server Error in 62ms (ActiveRecord: 32.0ms)
+
+ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  no existe la columna users.owner_id
+LINE 1: SELECT "users".* FROM "users" WHERE "users"."owner_id" IN ('...
+                                            ^
+: SELECT "users".* FROM "users" WHERE "users"."owner_id" IN ('1')):
+  app/controllers/rooms_controller.rb:37:in `create'
+
+
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.1ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (23.9ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (16.2ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/ruby/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (31.3ms)
+
+
+Started POST "/rooms" for 127.0.0.1 at 2016-04-21 15:04:32 -0500
+Processing by RoomsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gwFmyeUA9aPeSTIMVP0auMKmmiM1cc4jUqKOHnV08VE66rsuP7JofcuI1K4jMK5k/+Ny+dyS1QUNIXjIQbrkDQ==", "room"=>{"name"=>"Room", "socket_id"=>"123456789", "owner_id"=>"1"}, "commit"=>"Create Room"}
+  [1m[36mRoom Load (0.2ms)[0m  [1mSELECT  "rooms".* FROM "rooms" WHERE "rooms"."name" = $1 LIMIT 1[0m  [["name", "Room"]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "user_rooms" ("user_id", "room_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["user_id", 1], ["room_id", 1], ["created_at", "2016-04-21 20:04:32.121067"], ["updated_at", "2016-04-21 20:04:32.121067"]]
+  [1m[36m (14.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mRoom Load (0.2ms)[0m  SELECT "rooms".* FROM "rooms"
+  [1m[36mUserRoom Load (0.4ms)[0m  [1mSELECT "user_rooms".* FROM "user_rooms" WHERE "user_rooms"."room_id" IN (1)[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" IN (5, 1)
+Completed 200 OK in 56ms (Views: 7.0ms | ActiveRecord: 20.8ms)
+
+
+Started POST "/rooms" for 127.0.0.1 at 2016-04-21 15:08:08 -0500
+Processing by RoomsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gwFmyeUA9aPeSTIMVP0auMKmmiM1cc4jUqKOHnV08VE66rsuP7JofcuI1K4jMK5k/+Ny+dyS1QUNIXjIQbrkDQ==", "room"=>{"name"=>"Room", "socket_id"=>"123456789", "owner_id"=>"1"}, "commit"=>"Create Room"}
+  [1m[36mRoom Load (0.2ms)[0m  [1mSELECT  "rooms".* FROM "rooms" WHERE "rooms"."name" = $1 LIMIT 1[0m  [["name", "Room"]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "user_rooms" ("user_id", "room_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["user_id", 1], ["room_id", 1], ["created_at", "2016-04-21 20:08:08.763895"], ["updated_at", "2016-04-21 20:08:08.763895"]]
+  [1m[36m (16.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" INNER JOIN "user_rooms" ON "users"."id" = "user_rooms"."user_id" WHERE "user_rooms"."room_id" = $1  [["room_id", 1]]
+Completed 200 OK in 53ms (Views: 7.3ms | ActiveRecord: 22.2ms)
+
+
+Started POST "/rooms" for 127.0.0.1 at 2016-04-21 15:09:28 -0500
+Processing by RoomsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gwFmyeUA9aPeSTIMVP0auMKmmiM1cc4jUqKOHnV08VE66rsuP7JofcuI1K4jMK5k/+Ny+dyS1QUNIXjIQbrkDQ==", "room"=>{"name"=>"Room", "socket_id"=>"123456789", "owner_id"=>"1"}, "commit"=>"Create Room"}
+  [1m[36mRoom Load (0.2ms)[0m  [1mSELECT  "rooms".* FROM "rooms" WHERE "rooms"."name" = $1 LIMIT 1[0m  [["name", "Room"]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "user_rooms" ("user_id", "room_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["user_id", 1], ["room_id", 1], ["created_at", "2016-04-21 20:09:29.003428"], ["updated_at", "2016-04-21 20:09:29.003428"]]
+  [1m[36m (13.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" INNER JOIN "user_rooms" ON "users"."id" = "user_rooms"."user_id" WHERE "user_rooms"."room_id" = $1  [["room_id", 1]]
+Completed 200 OK in 50ms (Views: 0.1ms | ActiveRecord: 19.7ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2016-04-21 15:27:10 -0500
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  Rendered users/index.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 22ms (Views: 17.7ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2016-04-21 15:27:10 -0500
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users"
+  Rendered users/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 18ms (Views: 16.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2016-04-21 15:27:13 -0500
+Processing by UsersController#new as HTML
+  Rendered users/_form.html.erb (4.6ms)
+  Rendered users/new.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 29ms (Views: 27.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-04-21 15:27:20 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"pgwwKrxSPlYLf1hKcsgmw4xZsmZ/CNIKNUDUVe9mSYAf5+3NZuCjiB6+vugFBZIfsRxavJbrySxqwyKD26hc3A==", "user"=>{"name"=>"Test", "socket_id"=>"123456789"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."name" = $1 LIMIT 1[0m  [["name", "Test"]]
+  [1m[35mUser Load (0.4ms)[0m  SELECT "users".* FROM "users" WHERE ("users"."name" != $1)  [["name", "Test"]]
+  [1m[36mRoom Load (0.4ms)[0m  [1mSELECT "rooms".* FROM "rooms" INNER JOIN "user_rooms" ON "user_rooms"."room_id" = "rooms"."id" WHERE (user_rooms.user_id = 1 OR rooms.owner_id = 1)[0m
+Completed 200 OK in 22ms (Views: 13.8ms | ActiveRecord: 2.5ms)

@@ -24,16 +24,23 @@ class RoomsController < ApplicationController
   # POST /rooms
   # POST /rooms.json
   def create
-    @room = Room.new(room_params)
+    @room = Room.find_by(name: room_params[:name])
 
-    respond_to do |format|
-      if @room.save
-        format.html { redirect_to @room, notice: 'Room was successfully created.' }
-        format.json { render :show, status: :created, location: @room }
-      else
-        format.html { render :new }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
-      end
+    if @room.nil?
+      @room = Room.new(room_params)
+    end
+
+    room_users = @room.user_rooms.find_by(user_id: room_params[:owner_id])
+
+    if room_users.nil?
+      user = User.find(room_params[:owner_id])
+      room_users = @room.user_rooms.create(user: user)
+    end
+
+    if @room.save && room_users.save
+      render json: @room.to_json(include: :users) #@room.user_rooms.to_json(:include => [:user])
+    else
+      render json: {errors: @room.errors, status: :unprocessable_entity}
     end
   end
 
