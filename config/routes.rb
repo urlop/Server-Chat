@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :rooms
+  resources :contacts
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -18,8 +18,28 @@ Rails.application.routes.draw do
   # Example resource route with options:
   resources :users do
     member do
+      get 'show_friends'
+      get 'show_rooms'
+      get 'get_user_info'
     end
     collection do
+      post 'login'
+    end
+  end
+
+  resources :rooms do
+    member do
+      post 'invite'
+    end
+    collection do
+    end
+  end
+
+  resources :messages do
+    member do
+    end
+    collection do
+      get 'get_conversation'
     end
   end
 

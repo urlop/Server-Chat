@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: [:show, :edit, :update, :destroy]
+  before_action :set_room, only: [:show, :edit, :update, :destroy, :invite]
 
   # GET /rooms
   # GET /rooms.json
@@ -24,37 +24,31 @@ class RoomsController < ApplicationController
   # POST /rooms
   # POST /rooms.json
   def create
-    @room = Room.find_by(name: room_params[:name])
+    @room = Room.new(room_params)
+    @room.users << User.find(room_params[:owner_id])
 
-    if @room.nil?
-      @room = Room.new(room_params)
-    end
-
-    room_users = @room.user_rooms.find_by(user_id: room_params[:owner_id])
-
-    if room_users.nil?
-      user = User.find(room_params[:owner_id])
-      room_users = @room.user_rooms.create(user: user)
-    end
-
-    if @room.save && room_users.save
-      render json: @room.to_json(include: :users) #@room.user_rooms.to_json(:include => [:user])
+    if @room.save
+      render json: @room.to_json(include: :users), status: :ok
     else
-      render json: {errors: @room.errors, status: :unprocessable_entity}
+      render json: {error: @room.errors.full_messages.first}, status: :unprocessable_entity
     end
+  end
+
+  # POST /rooms/invite
+  # POST /rooms/invite.json
+  def invite
+    #Check that same user is not invited twice
+    @room.users << User.find(params[:user_id])
+    render json: @room.to_json(include: :users), status: :ok
   end
 
   # PATCH/PUT /rooms/1
   # PATCH/PUT /rooms/1.json
   def update
-    respond_to do |format|
-      if @room.update(room_params)
-        format.html { redirect_to @room, notice: 'Room was successfully updated.' }
-        format.json { render :show, status: :ok, location: @room }
-      else
-        format.html { render :edit }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
-      end
+    if @room.update(room_params)
+      render json: @room, status: :ok
+    else
+      render json: {error: @room.errors.full_messages.first}, status: :unprocessable_entity
     end
   end
 

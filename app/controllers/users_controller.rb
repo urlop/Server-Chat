@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  #If specific exception handling: http://code.tutsplus.com/articles/writing-robust-web-applications-the-lost-art-of-exception-handling--net-36395
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :show_friends, :show_rooms, :get_user_info]
 
   # GET /users
   # GET /users.json
@@ -12,6 +13,22 @@ class UsersController < ApplicationController
   def show
   end
 
+  # GET /users/1/get_user_info
+  def get_user_info
+    @users = User.friends(@user) #where.not(id: @user)
+    render json: {me: @user, users: @users, rooms: @user.rooms.as_json(include: :users)}, status: :ok
+  end
+
+  # GET /users/1/show_friends
+  def show_friends
+    render json: User.friends_by_name(@user.name), status: :ok
+  end
+
+  # GET /users/1/show_rooms
+  def show_rooms
+    render json: @user.rooms, status: :ok
+  end
+
   # GET /users/new
   def new
     @user = User.new
@@ -21,49 +38,43 @@ class UsersController < ApplicationController
   def edit
   end
 
-  # POST /users
-  # POST /users.json
-  def create
+  # POST /users/login
+  # POST /users/login.json
+  def login
+    p '~~~login~~~'
     @user = User.find_by(name: user_params[:name])
-    @users = User.where.not(name: user_params[:name])
 
-    if @user.nil?
-      p 'creating user'
-      @user = User.new(user_params)
-      if @user.save
-        render json: {users: @users, rooms: []}
-      else
-        render json: {errors: @user.errors, status: :unprocessable_entity}
-      end
+    if @user
+      @users = User.friends_by_name(user_params[:name])
+      render json: {me: @user, users: @users, rooms: @user.rooms}, status: :ok
     else
-      p 'user exists'
-      @rooms = Room.joins(:user_rooms).where("user_rooms.user_id = ? OR rooms.owner_id = ?", @user.id, @user.id) 
-      render json: {users: @users, rooms: @rooms}
+      render json: {error: "User does not exist"}, status: :unprocessable_entity
     end
-    # @user = User.new(user_params)
-
-    # respond_to do |format|
-    #   if @user.save
-    #     format.html { redirect_to @user, notice: 'User was successfully created.' }
-    #     format.json { render :show, status: :created, location: @user }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @user.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
-  # PATCH/PUT /users/1
+  # POST /users #sign_up
+  # POST /users.json
+  def create
+    @user = User.new(user_params)
+
+    if @user.save
+      @users = User.friends_by_name(user_params[:name])
+      render json: {me: @user, users: @users, rooms: []}, status: :ok
+    else
+      render json: {error: @user.errors.full_messages.first}, status: :unprocessable_entity
+    end
+  end
+
+  # PATCH/PUT /users/1 #connect
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    p '~~~update~~~'
+    p user_params
+
+    if @user.update(user_params)
+      render json: @user.to_json(include: :rooms), status: :ok
+    else
+      render json: {error: @user.errors.full_messages.first}, status: :unprocessable_entity
     end
   end
 
